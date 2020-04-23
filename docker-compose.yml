@@ -25,6 +25,7 @@ services:
       MYSQL_PASSWORD: 123
       MYSQL_DATABASE: instagram_profile_scraper
   db:
+    container_name: db
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: 123
