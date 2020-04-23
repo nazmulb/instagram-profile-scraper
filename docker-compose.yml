@@ -1,0 +1,52 @@
+version: "3"
+volumes:
+  mysql:
+networks:
+  ipsapp:
+    driver:
+      bridge
+services:
+  api:
+    container_name: api
+    build:
+      context: ./api
+    depends_on:
+      - db
+    volumes:
+      - ./api:/api
+      - /api/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - ipsapp
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123
+      MYSQL_DATABASE: instagram_profile_scraper
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: instagram_profile_scraper
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+      - mysql:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    networks:
+      - ipsapp
+  ui:
+    container_name: ui
+    build:
+      context: ./ui
+    volumes:
+      - ./ui:/ui
+      - /ui/node_modules
+    ports:
+      - "8080:8080"
+    networks:
+      - ipsapp
+    environment:
+      - API_URL=http://localhost:3000
