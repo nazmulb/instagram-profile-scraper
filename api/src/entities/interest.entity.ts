@@ -12,7 +12,7 @@ export class Interest {
   @IsNotEmpty()
   topic: string;
 
-  @Column({ default: 0 })
+  @Column({ type: 'float', default: 0 })
   interestRatio: number;
 
   @ManyToOne(

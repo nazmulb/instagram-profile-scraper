@@ -12,7 +12,7 @@ export class Brand {
   @IsNotEmpty()
   name: string;
 
-  @Column({ default: 0 })
+  @Column({ type: 'float', default: 0 })
   sentimentRatio: number;
 
   @ManyToOne(

@@ -10,7 +10,7 @@ export class Profile {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'bigint' })
   @IsNotEmpty()
   instProfileId: number;
 
@@ -22,7 +22,7 @@ export class Profile {
   @IsNotEmpty()
   username: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   profilePicUrl: string;
 
   @Column({ default: 0 })
@@ -40,10 +40,10 @@ export class Profile {
   @Column({ default: 0 })
   avgLikes: number;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   popularHashtags: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   popularMentions: string;
 
   @OneToMany(

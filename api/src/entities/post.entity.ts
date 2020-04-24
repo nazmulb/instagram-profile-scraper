@@ -12,14 +12,14 @@ export class Post {
   @IsNotEmpty()
   instShortCode: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   postText: string;
 
-  @Column()
+  @Column({ type: 'text' })
   @IsNotEmpty()
   displayUrl: string;
 
-  @Column()
+  @Column({ type: 'text' })
   @IsNotEmpty()
   thumbnailUrl: string;
 
@@ -32,7 +32,7 @@ export class Post {
   @Column({ default: false })
   isVideo: boolean;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   videoUrl: string;
 
   @Column({ default: 0 })

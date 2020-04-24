@@ -12,7 +12,7 @@ export class ProfilesService {
   }
 
   async getProfile(id: number): Promise<Profile> {
-    const profile: Profile = await this.profileRepository.findOne(id);
+    const profile: Profile = await this.profileRepository.getProfile(id);
     return profile;
   }
 }
