@@ -8,17 +8,17 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Home
   },
   {
     path: "/about",
     name: "About",
-    component: () => import("../views/Profile.vue"),
-  },
+    component: () => import("../views/Profile.vue")
+  }
 ];
 
 const router = new VueRouter({
-  routes,
+  routes
 });
 
 export default router;
