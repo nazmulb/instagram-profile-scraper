@@ -5,8 +5,8 @@ import { AnalyzeService } from './analyze.service';
 export class AnalyzeController {
   constructor(private readonly analyzeService: AnalyzeService) {}
 
-  @Post(':userHandle')
-  scrapeAndAnalyzeProfile(@Param('userHandle') userHandle: string): string {
-    return this.analyzeService.scrapeAndAnalyzeProfile(userHandle);
+  @Post(':userHandle/:queryHash')
+  scrapeAndAnalyzeProfile(@Param('userHandle') userHandle: string, @Param('queryHash') queryHash: string): any {
+    return this.analyzeService.scrapeAndAnalyzeProfile(userHandle, queryHash);
   }
 }

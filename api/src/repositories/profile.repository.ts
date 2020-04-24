@@ -12,4 +12,11 @@ export class ProfileRepository extends Repository<Profile> {
       .take(1)
       .getOne();
   }
+
+  async getProfileByUsername(username: string): Promise<Profile> {
+    return await this.createQueryBuilder('profile')
+      .where('profile.username = :username', { username })
+      .take(1)
+      .getOne();
+  }
 }
