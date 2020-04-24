@@ -38,8 +38,8 @@ export class Post {
   @Column({ default: 0 })
   videoViewCount: number;
 
-  @Column({ type: 'timestamp' })
-  takenAtTimestamp: string;
+  @Column({ default: 0 })
+  takenAtTimestamp: number;
 
   @ManyToOne(
     type => Profile,
