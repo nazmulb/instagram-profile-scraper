@@ -21,6 +21,7 @@ services:
       - ipsapp
     environment:
       MYSQL_HOST: db
+      MYSQL_PORT: 3306
       MYSQL_USER: root
       MYSQL_PASSWORD: 123
       MYSQL_DATABASE: instagram_profile_scraper

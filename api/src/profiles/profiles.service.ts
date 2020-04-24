@@ -1,12 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { ProfileRepository } from '../repositories/profile.repository';
+import { Profile } from '../entities/profile.entity';
 
 @Injectable()
 export class ProfilesService {
-    getProfiles(): string {
-        return "Show all profiles";
-    }
+  constructor(private readonly profileRepository: ProfileRepository) {}
 
-    getProfile(id: number): string {
-        return `Show profile by if: ${id}`;
-    }
+  async getProfiles(): Promise<Profile[]> {
+    const profiles: Profile[] = await this.profileRepository.find();
+    return profiles;
+  }
+
+  async getProfile(id: number): Promise<Profile> {
+    const profile: Profile = await this.profileRepository.findOne(id);
+    return profile;
+  }
 }
