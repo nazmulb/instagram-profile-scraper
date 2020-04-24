@@ -10,7 +10,7 @@ export class Profile {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'bigint' })
+  @Column({ type: 'bigint', unique: true })
   @IsNotEmpty()
   instProfileId: number;
 
@@ -18,7 +18,7 @@ export class Profile {
   @IsNotEmpty()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   @IsNotEmpty()
   username: string;
 
