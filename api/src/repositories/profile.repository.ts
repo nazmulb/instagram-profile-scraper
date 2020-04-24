@@ -9,6 +9,7 @@ export class ProfileRepository extends Repository<Profile> {
       .leftJoinAndSelect('profile.brands', 'brand')
       .leftJoinAndSelect('profile.interests', 'interest')
       .where('profile.id = :id', { id })
+      .take(1)
       .getOne();
   }
 }
