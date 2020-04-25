@@ -61,7 +61,6 @@ export class AnalyzeService {
           profile = await this.profileRepository.save(profile);
 
           let postCount = 0;
-
           for (const key in profileData.edge_owner_to_timeline_media.edges) {
             if (
               profileData.edge_owner_to_timeline_media.edges.hasOwnProperty(key)
