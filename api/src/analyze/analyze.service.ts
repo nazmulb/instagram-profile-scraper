@@ -51,9 +51,6 @@ export class AnalyzeService {
             popularMentions: '',
           };
 
-          let pageInfo: Instagram.PageInfo =
-            profileData.edge_owner_to_timeline_media.page_info;
-
           profile = new Profile();
           profile.name = profileData.full_name;
           profile.username = profileData.username;
@@ -66,30 +63,34 @@ export class AnalyzeService {
           let postCount = 0;
 
           for (const key in profileData.edge_owner_to_timeline_media.edges) {
-            postCount++;
-            const iposts: Instagram.Posts =
-              profileData.edge_owner_to_timeline_media.edges[key];
+            if (
+              profileData.edge_owner_to_timeline_media.edges.hasOwnProperty(key)
+            ) {
+              postCount++;
+              const iposts: Instagram.Posts =
+                profileData.edge_owner_to_timeline_media.edges[key];
 
-            analyze.totalLikes += iposts.node.edge_media_preview_like.count;
-            analyze.totalComments += iposts.node.edge_media_to_comment.count;
+              analyze.totalLikes += iposts.node.edge_media_preview_like.count;
+              analyze.totalComments += iposts.node.edge_media_to_comment.count;
 
-            if (postCount <= 3) {
-              const post: Post = new Post();
-              post.profile = profile;
-              post.instShortCode = iposts.node.shortcode;
-              post.displayUrl = iposts.node.display_url;
-              post.isVideo = iposts.node.is_video;
-              post.takenAtTimestamp = iposts.node.taken_at_timestamp;
-              post.thumbnailUrl = iposts.node.thumbnail_src;
-              post.totalLikes = iposts.node.edge_media_preview_like.count;
-              post.totalComments = iposts.node.edge_media_to_comment.count;
-              if (iposts.node.edge_media_to_caption.edges.length > 0) {
-                post.postText = encode(
-                  iposts.node.edge_media_to_caption.edges[0].node.text,
-                );
+              if (postCount <= 3) {
+                const post: Post = new Post();
+                post.profile = profile;
+                post.instShortCode = iposts.node.shortcode;
+                post.displayUrl = iposts.node.display_url;
+                post.isVideo = iposts.node.is_video;
+                post.takenAtTimestamp = iposts.node.taken_at_timestamp;
+                post.thumbnailUrl = iposts.node.thumbnail_src;
+                post.totalLikes = iposts.node.edge_media_preview_like.count;
+                post.totalComments = iposts.node.edge_media_to_comment.count;
+                if (iposts.node.edge_media_to_caption.edges.length > 0) {
+                  post.postText = encode(
+                    iposts.node.edge_media_to_caption.edges[0].node.text,
+                  );
+                }
+
+                await this.postRepository.save(post);
               }
-
-              await this.postRepository.save(post);
             }
           }
 
@@ -106,12 +107,10 @@ export class AnalyzeService {
           profile.engagementRate = analyze.engagementRate;
           profile.avgLikes = analyze.avgLikes;
 
-          console.log(analyze);
-
           await this.profileRepository.save(profile);
           return {
-            message: `The Instagram profile of ${profile.name} is scraped and analyzed successfully.`
-          }
+            message: `The Instagram profile of ${profile.name} is scraped and analyzed successfully.`,
+          };
         } catch (e) {
           throw new HttpException(
             {

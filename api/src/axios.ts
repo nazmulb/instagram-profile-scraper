@@ -3,17 +3,16 @@ import axios from 'axios';
 const instance = axios.create({
   baseURL: 'https://www.instagram.com',
   headers: {
-    Accept: 'application/json',
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
 });
 
 instance.interceptors.response.use(
-  function(response) {
+  response => {
     return response;
   },
-  function(error) {
-    //console.log(error);
+  error => {
     return Promise.reject(error);
   },
 );
