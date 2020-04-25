@@ -4,7 +4,7 @@ export const namespaced = true;
 
 export const state = {
   profiles: [],
-  profile: {},
+  profile: {}
 };
 
 export const mutations = {
@@ -13,39 +13,39 @@ export const mutations = {
   },
   SET_PROFILE(state, profile) {
     state.profile = profile;
-  },
+  }
 };
 
 export const actions = {
   fetchProfiles({ commit, dispatch }) {
     ProfileService.getProfiles()
-      .then((response) => {
+      .then(response => {
         commit("SET_PROFILES", response.data);
       })
-      .catch((error) => {
+      .catch(error => {
         const notification = {
           type: "error",
-          message: "There was a problem fetching profiles: " + error.message,
+          message: "There was a problem fetching profiles: " + error.message
         };
         dispatch("notification/add", notification, { root: true });
       });
   },
   fetchProfile({ commit, dispatch }, id) {
     ProfileService.getProfile(id)
-      .then((response) => {
+      .then(response => {
         commit("SET_PROFILE", response.data);
       })
-      .catch((error) => {
+      .catch(error => {
         const notification = {
           type: "error",
-          message: "There was a problem fetching profile: " + error.message,
+          message: "There was a problem fetching profile: " + error.message
         };
         dispatch("notification/add", notification, { root: true });
       });
-  },
+  }
 };
 
 export const getters = {
-  getProfiles: (state) => state.profiles,
-  getProfile: (state) => state.profile,
+  getProfiles: state => state.profiles,
+  getProfile: state => state.profile
 };
