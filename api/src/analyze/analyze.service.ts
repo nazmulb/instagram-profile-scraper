@@ -118,6 +118,18 @@ export class AnalyzeService {
           profile.engagementRate = analyze.engagementRate;
           profile.avgLikes = analyze.avgLikes;
 
+          const brand: Brand = new Brand();
+          brand.profile = profile;
+          brand.name = 'Apple';
+          brand.sentimentRatio = 16.51;
+          await this.brandRepository.save(brand);
+
+          const interest: Interest = new Interest();
+          interest.profile = profile;
+          interest.topic = 'Camera & photography';
+          interest.interestRatio = 49.84;
+          await this.interestRepository.save(interest);
+
           await this.profileRepository.save(profile);
           return {
             message: `The Instagram profile of ${profile.name} is scraped and analyzed successfully.`,
