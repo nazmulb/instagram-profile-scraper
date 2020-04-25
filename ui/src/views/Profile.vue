@@ -3,7 +3,12 @@
     <div class="col-12 col-sm-8 col-lg-7">
       <div class="nav-back">
         <router-link to="/">
-          <img src="../assets/images/back.svg" width="23" height="20" alt="back" />
+          <img
+            src="../assets/images/back.svg"
+            width="23"
+            height="20"
+            alt="back"
+          />
         </router-link>
       </div>
       <div class="box-card modash-profile-container">
@@ -13,7 +18,8 @@
             class="profile-handle-link"
             href="https://www.instagram.com/theaveryschrader"
             target="_blank"
-          >@therock</a>
+            >@therock</a
+          >
         </p>
       </div>
     </div>

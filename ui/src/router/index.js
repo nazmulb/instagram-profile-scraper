@@ -8,18 +8,18 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Home
   },
   {
     path: "/profile/:id",
     name: "Profile",
     component: () => import("../views/Profile.vue"),
-    props: true,
-  },
+    props: true
+  }
 ];
 
 const router = new VueRouter({
-  routes,
+  routes
 });
 
 export default router;
