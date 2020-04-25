@@ -9,6 +9,7 @@ import {
 } from '../repositories';
 import { Profile, Post, Brand, Interest } from '../entities';
 import { Instagram } from '../interfaces';
+import { encode } from 'punycode';
 
 @Injectable()
 export class AnalyzeService {
@@ -86,8 +87,7 @@ export class AnalyzeService {
               post.totalLikes = iposts.node.edge_media_preview_like.count;
               post.totalComments = iposts.node.edge_media_to_comment.count;
               if (iposts.node.edge_media_to_caption.edges.length > 0) {
-                post.postText =
-                  iposts.node.edge_media_to_caption.edges[0].node.text;
+                post.postText = encode(iposts.node.edge_media_to_caption.edges[0].node.text);
               }
 
               await this.postRepository.save(post);

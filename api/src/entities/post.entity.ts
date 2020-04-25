@@ -12,7 +12,7 @@ export class Post {
   @IsNotEmpty()
   instShortCode: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text', charset: "utf8mb4", collation: "utf8mb4_unicode_ci", nullable: true })
   postText: string;
 
   @Column({ type: 'text' })
