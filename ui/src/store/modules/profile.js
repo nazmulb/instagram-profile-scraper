@@ -30,7 +30,7 @@ export const actions = {
         dispatch("notification/add", notification, { root: true });
       });
   },
-  getProfile({ commit, dispatch }, id) {
+  fetchProfile({ commit, dispatch }, id) {
     ProfileService.getProfile(id)
       .then(response => {
         commit("SET_PROFILE", response.data);
