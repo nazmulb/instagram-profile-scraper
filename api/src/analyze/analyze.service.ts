@@ -1,8 +1,13 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { ProfileRepository } from '../repositories/profile.repository';
-import { Profile } from '../entities/profile.entity';
-import { InstagramProfile } from '../interfaces/instagram-profile.interface';
 import axios from '../axios';
+import {
+  ProfileRepository,
+  PostRepository,
+  BrandRepository,
+  InterestRepository,
+} from '../repositories';
+import { Profile, Post, Brand, Interest } from '../entities';
+import { InstagramProfile } from '../interfaces';
 
 @Injectable()
 export class AnalyzeService {
@@ -15,8 +20,13 @@ export class AnalyzeService {
     const profileData: InstagramProfile = await this.scrapeProfile(userHandle);
 
     console.log(
-      profileData.edge_owner_to_timeline_media.edges[0].node.edge_media_to_caption.edges[0].node.text,
+      profileData.edge_owner_to_timeline_media.edges[0].node
+        .edge_media_to_caption.edges[0].node.text,
     );
+    let post = new Post();
+    post.postText =
+      profileData.edge_owner_to_timeline_media.edges[0].node.edge_media_to_caption.edges[0].node.text;
+
     return;
 
     if (profileData) {
