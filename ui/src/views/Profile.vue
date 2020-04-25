@@ -3,7 +3,12 @@
     <div class="col-12 col-sm-8 col-lg-7">
       <div class="nav-back">
         <router-link to="/">
-          <img src="../assets/images/back.svg" width="23" height="20" alt="back" />
+          <img
+            src="../assets/images/back.svg"
+            width="23"
+            height="20"
+            alt="back"
+          />
         </router-link>
       </div>
       <div class="box modash-profile-container">

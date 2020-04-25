@@ -2,7 +2,12 @@
   <header class="modash-header">
     <nav class="navbar">
       <span class="navbar-brand">
-        <img src="../../assets/images/logo.svg" width="160" height="56" alt="Modash" />
+        <img
+          src="../../assets/images/logo.svg"
+          width="160"
+          height="56"
+          alt="Modash"
+        />
       </span>
     </nav>
   </header>
