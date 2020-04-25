@@ -10,7 +10,7 @@
 <script>
 // @ is an alias to /src
 //import HelloWorld from "@/components/HelloWorld.vue";
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -18,7 +18,7 @@ export default {
     //HelloWorld
   },
   computed: {
-    ...mapState(["profile"])
+    ...mapGetters("profile", ["getProfiles"])
   },
   methods: mapActions("profile", ["fetchProfiles"]),
   created() {

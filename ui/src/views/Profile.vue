@@ -3,12 +3,7 @@
     <div class="col-12 col-sm-8 col-lg-7">
       <div class="nav-back">
         <router-link to="/">
-          <img
-            src="../assets/images/back.svg"
-            width="23"
-            height="20"
-            alt="back"
-          />
+          <img src="../assets/images/back.svg" width="23" height="20" alt="back" />
         </router-link>
       </div>
       <div class="box-card modash-profile-container">
@@ -18,8 +13,7 @@
             class="profile-handle-link"
             href="https://www.instagram.com/theaveryschrader"
             target="_blank"
-            >@therock</a
-          >
+          >@therock</a>
         </p>
       </div>
     </div>
@@ -27,13 +21,18 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Profile",
-  props: ["id"],
+  props: {
+    id: {
+      type: [Number, String],
+      required: true
+    }
+  },
   computed: {
-    ...mapState(["profile"])
+    ...mapGetters("profile", ["getProfile"])
   },
   methods: mapActions("profile", ["fetchProfile"]),
   created() {
