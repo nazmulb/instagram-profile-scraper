@@ -1,0 +1,26 @@
+{
+  "name": "instagram-profile-scraper",
+  "version": "1.0.0",
+  "description": "Scrape and analyze Instagram profiles to show relevant data in minimal UI.",
+  "scripts": {
+    "lint": "cd api && npm run lint && cd .. && cd ui && npm run lint",
+    "lint:fix": "cd api && npm run lint:fix && cd .. && cd ui && npm run lint:fix"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "keywords": [
+    "instagram Scrape",
+    "instagram",
+    "Scrape"
+  ],
+  "author": "Nazmul Basher<nazmul.basher@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nazmulb/instagram-profile-scraper/issues"
+  },
+  "homepage": "https://github.com/nazmulb/instagram-profile-scraper#readme",
+  "devDependencies": {
+    "pre-commit": "^1.2.2"
+  }
+}
