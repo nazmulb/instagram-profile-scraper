@@ -10,11 +10,19 @@
 <script>
 // @ is an alias to /src
 //import HelloWorld from "@/components/HelloWorld.vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Home",
   components: {
     //HelloWorld
+  },
+  computed: {
+    ...mapState(["profile"])
+  },
+  methods: mapActions("profile", ["fetchProfiles"]),
+  created() {
+    this.fetchProfiles();
   }
 };
 </script>
