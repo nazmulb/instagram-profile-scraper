@@ -34,7 +34,7 @@ export class Profile {
   @Column({ default: 0 })
   engagements: number;
 
-  @Column({ default: 0 })
+  @Column({ type: 'float', default: 0 })
   engagementRate: number;
 
   @Column({ default: 0 })

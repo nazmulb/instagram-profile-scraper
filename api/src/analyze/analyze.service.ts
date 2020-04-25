@@ -66,6 +66,7 @@ export class AnalyzeService {
           profile = await this.profileRepository.save(profile);
 
           let postCount = 0;
+
           for (const key in profileData.edge_owner_to_timeline_media.edges) {
             postCount++;
             const iposts: Instagram.Posts =
@@ -84,8 +85,10 @@ export class AnalyzeService {
               post.thumbnailUrl = iposts.node.thumbnail_src;
               post.totalLikes = iposts.node.edge_media_preview_like.count;
               post.totalComments = iposts.node.edge_media_to_comment.count;
-              post.postText =
-                iposts.node.edge_media_to_caption.edges[0].node.text;
+              if (iposts.node.edge_media_to_caption.edges.length > 0) {
+                post.postText =
+                  iposts.node.edge_media_to_caption.edges[0].node.text;
+              }
 
               await this.postRepository.save(post);
             }
@@ -103,6 +106,8 @@ export class AnalyzeService {
           profile.engagements = analyze.engagements;
           profile.engagementRate = analyze.engagementRate;
           profile.avgLikes = analyze.avgLikes;
+
+          console.log(analyze);
 
           await this.profileRepository.save(profile);
         } catch (e) {
