@@ -20,10 +20,7 @@ export class AnalyzeService {
     private readonly interestRepository: InterestRepository,
   ) {}
 
-  async scrapeAndAnalyzeProfile(
-    userHandle: string,
-    queryHash: string,
-  ): Promise<any> {
+  async scrapeAndAnalyzeProfile(userHandle: string): Promise<object> {
     const profileData: Instagram.Profile = await this.scrapeProfile(userHandle);
 
     if (profileData) {
@@ -112,6 +109,9 @@ export class AnalyzeService {
           console.log(analyze);
 
           await this.profileRepository.save(profile);
+          return {
+            message: `The Instagram profile of ${profile.name} is scraped and analyzed successfully.`
+          }
         } catch (e) {
           throw new HttpException(
             {
