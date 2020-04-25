@@ -90,6 +90,17 @@ export class AnalyzeService {
                   );
                 }
 
+                if (post.isVideo) {
+                  const postVideoData: Instagram.Post = await this.scrapeVideoInfoFromPost(
+                    post.instShortCode,
+                  );
+
+                  if (postVideoData) {
+                    post.videoUrl = postVideoData.video_url;
+                    post.videoViewCount = postVideoData.video_view_count;
+                  }
+                }
+
                 await this.postRepository.save(post);
               }
             }
@@ -127,6 +138,11 @@ export class AnalyzeService {
     return profileData;
   }
 
+  /**
+   * To scrape Instagram profile
+   * @param {string} userHandle - user handle
+   * @returns {Promise<any>}
+   */
   private async scrapeProfile(userHandle: string): Promise<any> {
     return await axios
       .get(`/${userHandle}/?__a=1`)
@@ -136,6 +152,26 @@ export class AnalyzeService {
           {
             status: HttpStatus.NOT_FOUND,
             error: 'Profile not found.',
+          },
+          HttpStatus.NOT_FOUND,
+        );
+      });
+  }
+
+  /**
+   * To scrape Instagram video info from a post
+   * @param {string} postShortCode - post short code
+   * @returns {Promise<any>}
+   */
+  private async scrapeVideoInfoFromPost(postShortCode: string): Promise<any> {
+    return await axios
+      .get(`/p/${postShortCode}/?__a=1`)
+      .then(res => res.data.graphql.shortcode_media)
+      .catch(_ => {
+        throw new HttpException(
+          {
+            status: HttpStatus.NOT_FOUND,
+            error: 'Post not found.',
           },
           HttpStatus.NOT_FOUND,
         );
