@@ -30,8 +30,8 @@ export default {
 
   .modash-list:hover {
     transform: scale(1.01);
-    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2),
-      0 1px 15px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 0.19rem 0.75rem 0 rgba(0, 0, 0, 0.2),
+      0 0.06rem 0.9rem 0 rgba(0, 0, 0, 0.19);
   }
 }
 </style>
