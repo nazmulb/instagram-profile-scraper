@@ -9,31 +9,56 @@
       <div v-else>
         <div class="nav-back">
           <router-link to="/">
-            <img src="../assets/images/back.svg" width="23" height="20" alt="back" />
+            <img
+              src="../assets/images/back.svg"
+              width="23"
+              height="20"
+              alt="back"
+            />
           </router-link>
         </div>
         <div class="box-card profile-container">
           <div class="profile-picture">
-            <img :src="getProfile.profilePicUrl" width="120" height="120" :alt="getProfile.name" />
+            <img
+              :src="getProfile.profilePicUrl"
+              width="120"
+              height="120"
+              :alt="getProfile.name"
+            />
           </div>
           <h5 class="profile-name">{{ getProfile.name }}</h5>
           <p class="profile-handle">@{{ getProfile.username }}</p>
 
           <div class="profile-rating">
             <div class="box-card">
-              <img src="../assets/images/group.svg" width="26" height="14" alt="group" />
+              <img
+                src="../assets/images/group.svg"
+                width="26"
+                height="14"
+                alt="group"
+              />
               <p>{{ getProfile.following }}</p>
               <p>Following</p>
             </div>
 
             <div class="box-card">
-              <img src="../assets/images/group.svg" width="26" height="14" alt="group" />
+              <img
+                src="../assets/images/group.svg"
+                width="26"
+                height="14"
+                alt="group"
+              />
               <p>{{ getProfile.followers }}</p>
               <p>Followers</p>
             </div>
 
             <div class="box-card">
-              <img src="../assets/images/favorite.svg" width="24" height="18" alt="favorite" />
+              <img
+                src="../assets/images/favorite.svg"
+                width="24"
+                height="18"
+                alt="favorite"
+              />
               <p>{{ getProfile.avgLikes }}</p>
               <p>Avg Likes</p>
             </div>
@@ -63,7 +88,11 @@
             <div v-if="getProfile.brands.length" class="box-card">
               <h6 class="section-header">Brand affinity</h6>
               <ul class="list-group">
-                <li v-for="brand in getProfile.brands" :key="brand.id" class="list-item">
+                <li
+                  v-for="brand in getProfile.brands"
+                  :key="brand.id"
+                  class="list-item"
+                >
                   <span>{{ brand.name }}</span>
                   <span>{{ brand.sentimentRatio }}%</span>
                 </li>
@@ -73,7 +102,11 @@
             <div v-if="getProfile.interests.length" class="box-card">
               <h6 class="section-header">Interests</h6>
               <ul class="list-group">
-                <li v-for="interest in getProfile.interests" :key="interest.id" class="list-item">
+                <li
+                  v-for="interest in getProfile.interests"
+                  :key="interest.id"
+                  class="list-item"
+                >
                   <span>{{ interest.topic }}</span>
                   <span>{{ interest.interestRatio }}%</span>
                 </li>
@@ -82,12 +115,26 @@
           </div>
 
           <div v-if="getProfile.posts.length" class="profile-latest-posts">
-            <img src="../assets/images/instagram.svg" width="13" height="13" alt="instagram" />
+            <img
+              src="../assets/images/instagram.svg"
+              width="13"
+              height="13"
+              alt="instagram"
+            />
             <h6 class="section-header">Latest posts</h6>
-            <div class="box-card" v-for="post in getProfile.posts" :key="post.id">
+            <div
+              class="box-card"
+              v-for="post in getProfile.posts"
+              :key="post.id"
+            >
               <p>{{ post.takenAtTimestamp }}</p>
               <p v-if="!post.isVideo">
-                <img :src="post.thumbnailUrl" width="215" height="190" alt="Post Picture" />
+                <img
+                  :src="post.thumbnailUrl"
+                  width="215"
+                  height="190"
+                  alt="Post Picture"
+                />
               </p>
               <p v-if="post.isVideo">
                 <video
@@ -105,15 +152,30 @@
               </p>
               <p>
                 <span v-if="post.isVideo">
-                  <img src="../assets/images/play.svg" width="11" height="11" alt="play" />
+                  <img
+                    src="../assets/images/play.svg"
+                    width="11"
+                    height="11"
+                    alt="play"
+                  />
                   {{ post.videoViewCount }}
                 </span>
                 <span>
-                  <img src="../assets/images/likes.svg" width="15" height="10" alt="likes" />
+                  <img
+                    src="../assets/images/likes.svg"
+                    width="15"
+                    height="10"
+                    alt="likes"
+                  />
                   {{ post.totalLikes }}
                 </span>
                 <span>
-                  <img src="../assets/images/comments.svg" width="15" height="12" alt="comments" />
+                  <img
+                    src="../assets/images/comments.svg"
+                    width="15"
+                    height="12"
+                    alt="comments"
+                  />
                   {{ post.totalComments }}
                 </span>
               </p>

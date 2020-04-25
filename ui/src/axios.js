@@ -4,15 +4,15 @@ const instance = axios.create({
   baseURL: "http://localhost:3000",
   headers: {
     Accept: "application/json",
-    "Content-Type": "application/json",
-  },
+    "Content-Type": "application/json"
+  }
 });
 
 instance.interceptors.response.use(
-  async (response) => {
+  async response => {
     return response;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
   }
 );
