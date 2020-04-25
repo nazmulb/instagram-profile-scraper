@@ -7,12 +7,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: Home
   },
   {
     path: "/profile/:id",
-    name: "Profile",
+    name: "profile",
     component: () => import("../views/Profile.vue"),
     props: true
   }
