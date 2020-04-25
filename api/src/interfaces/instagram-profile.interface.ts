@@ -20,7 +20,6 @@ export interface MediaCaption {
 }
 
 export interface Post {
-  id?: number;
   shortcode?: string;
   display_url?: string;
   thumbnail_src?: string;
@@ -29,7 +28,7 @@ export interface Post {
   edge_media_preview_like?: Count;
   video_view_count?: number;
   taken_at_timestamp?: number;
-  videoUrl?: string;
+  video_url?: string;
   edge_media_to_caption?: MediaCaption;
 }
 
