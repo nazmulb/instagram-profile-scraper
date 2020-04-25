@@ -1,5 +1,10 @@
 <template>
-  <div class="home"></div>
+  <div class="row justify-content-center modash-home">
+    <div class="col-12 col-sm-8 col-lg-7">
+      <div class="box modash-list">Dwayne Johnson</div>
+      <div class="box modash-list">Dwayne Johnson</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -14,4 +19,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.modash-home {
+  .modash-list {
+    margin-bottom: 1rem;
+  }
+}
+</style>
