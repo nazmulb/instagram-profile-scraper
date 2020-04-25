@@ -1,7 +1,11 @@
 <template>
   <div class="row justify-content-center modash-home">
     <div class="col-12 col-sm-8 col-lg-7">
-      <ProfileList v-for="profile in getProfiles" :key="profile.id" :profile="profile" />
+      <ProfileList
+        v-for="profile in getProfiles"
+        :key="profile.id"
+        :profile="profile"
+      />
     </div>
   </div>
 </template>
@@ -26,5 +30,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

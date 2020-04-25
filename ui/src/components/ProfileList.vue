@@ -1,5 +1,8 @@
 <template>
-  <router-link class="modash-profile-link" :to="{ name: 'profile', params: { id: profile.id } }">
+  <router-link
+    class="modash-profile-link"
+    :to="{ name: 'profile', params: { id: profile.id } }"
+  >
     <div class="box-card modash-list">{{ profile.name }}</div>
   </router-link>
 </template>
