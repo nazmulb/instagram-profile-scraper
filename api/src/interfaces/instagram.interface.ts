@@ -42,7 +42,7 @@ export interface TimelineMedia {
   edges?: Posts[];
 }
 
-export interface InstagramProfile {
+export interface Profile {
   id?: number;
   full_name?: string;
   username?: string;

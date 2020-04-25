@@ -1,3 +1,3 @@
-import { InstagramProfile } from './instagram-profile.interface';
+import * as Instagram from './instagram.interface';
 
-export { InstagramProfile };
+export { Instagram };
