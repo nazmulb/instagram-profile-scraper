@@ -26,7 +26,18 @@ export class AnalyzeService {
       profile.profilePicUrl = profileDate.profile_pic_url;
       profile.followers = profileDate.edge_followed_by.count;
       profile.following = profileDate.edge_follow.count;
-      await this.profileRepository.save(profile);
+
+      try {
+        await this.profileRepository.save(profile);
+      } catch (_) {
+        throw new HttpException(
+          {
+            status: HttpStatus.BAD_REQUEST,
+            error: 'A profile with the given username or instagram id already exists.',
+          },
+          HttpStatus.BAD_REQUEST,
+        );
+      }
     }
 
     return profileDate;
@@ -39,10 +50,10 @@ export class AnalyzeService {
       .catch(_ => {
         throw new HttpException(
           {
-            status: HttpStatus.BAD_REQUEST,
+            status: HttpStatus.NOT_FOUND,
             error: 'Profile not found',
           },
-          HttpStatus.BAD_REQUEST,
+          HttpStatus.NOT_FOUND,
         );
       });
   }
