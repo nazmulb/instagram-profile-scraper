@@ -73,6 +73,7 @@ export class AnalyzeService {
               analyze.totalLikes += iposts.node.edge_media_preview_like.count;
               analyze.totalComments += iposts.node.edge_media_to_comment.count;
 
+              // save only first 3 posts into database
               if (postCount <= 3) {
                 const post: Post = new Post();
                 post.profile = profile;
