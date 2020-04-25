@@ -3,10 +3,16 @@
     <div class="col-12 col-sm-8 col-lg-7">
       <div v-if="getLoading" class="box-card text-center">Loading...</div>
       <div
-        v-if="getProfiles.length==0 && !getLoading"
+        v-if="getProfiles.length == 0 && !getLoading"
         class="box-card text-center"
-      >There is no profile to show!</div>
-      <ProfileList v-for="profile in getProfiles" :key="profile.id" :profile="profile" />
+      >
+        There is no profile to show!
+      </div>
+      <ProfileList
+        v-for="profile in getProfiles"
+        :key="profile.id"
+        :profile="profile"
+      />
     </div>
   </div>
 </template>

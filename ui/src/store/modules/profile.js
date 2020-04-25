@@ -5,7 +5,7 @@ export const namespaced = true;
 export const state = {
   profiles: [],
   profile: {},
-  loading: false,
+  loading: false
 };
 
 export const mutations = {

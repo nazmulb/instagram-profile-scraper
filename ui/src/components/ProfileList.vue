@@ -1,8 +1,16 @@
 <template>
-  <router-link class="modash-profile-link" :to="{ name: 'profile', params: { id: profile.id } }">
+  <router-link
+    class="modash-profile-link"
+    :to="{ name: 'profile', params: { id: profile.id } }"
+  >
     <div class="box-card list">
       <div class="profile-picture">
-        <img :src="profile.profilePicUrl" width="50" height="50" :alt="profile.name" />
+        <img
+          :src="profile.profilePicUrl"
+          width="50"
+          height="50"
+          :alt="profile.name"
+        />
       </div>
 
       <div>
