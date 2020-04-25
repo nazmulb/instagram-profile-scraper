@@ -50,5 +50,3 @@ services:
       - "8080:8080"
     networks:
       - ipsapp
-    environment:
-      API_URL: http://localhost:3000
