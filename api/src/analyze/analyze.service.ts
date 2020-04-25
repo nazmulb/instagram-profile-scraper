@@ -87,7 +87,9 @@ export class AnalyzeService {
               post.totalLikes = iposts.node.edge_media_preview_like.count;
               post.totalComments = iposts.node.edge_media_to_comment.count;
               if (iposts.node.edge_media_to_caption.edges.length > 0) {
-                post.postText = encode(iposts.node.edge_media_to_caption.edges[0].node.text);
+                post.postText = encode(
+                  iposts.node.edge_media_to_caption.edges[0].node.text,
+                );
               }
 
               await this.postRepository.save(post);
@@ -114,8 +116,7 @@ export class AnalyzeService {
           throw new HttpException(
             {
               status: HttpStatus.BAD_REQUEST,
-              error: e,
-              //error: 'Something went wrong.',
+              error: 'Something went wrong.',
             },
             HttpStatus.BAD_REQUEST,
           );
