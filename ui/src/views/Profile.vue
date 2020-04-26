@@ -1,11 +1,7 @@
 <template>
   <div class="row justify-content-center modash-profile">
     <div class="col-12 col-sm-8 col-lg-7">
-      <div v-if="getLoading" class="box-card text-center">
-        <div class="spinner-border text-info" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
+      <Spinner v-if="getLoading" />
       <div v-else>
         <div class="nav-back">
           <router-link to="/">
@@ -85,7 +81,10 @@
           </div>
 
           <div class="profile-brand">
-            <div v-if="getProfile.brands.length" class="box-card">
+            <div
+              v-if="getProfile.brands && getProfile.brands.length"
+              class="box-card"
+            >
               <h6 class="section-header">Brand affinity</h6>
               <ul class="list-group">
                 <li
@@ -99,7 +98,10 @@
               </ul>
             </div>
 
-            <div v-if="getProfile.interests.length" class="box-card">
+            <div
+              v-if="getProfile.interests && getProfile.interests.length"
+              class="box-card"
+            >
               <h6 class="section-header">Interests</h6>
               <ul class="list-group">
                 <li
@@ -114,7 +116,10 @@
             </div>
           </div>
 
-          <div v-if="getProfile.posts.length" class="profile-latest-posts">
+          <div
+            v-if="getProfile.posts && getProfile.posts.length"
+            class="profile-latest-posts"
+          >
             <img
               src="../assets/images/instagram.svg"
               width="13"

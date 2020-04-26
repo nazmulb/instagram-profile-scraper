@@ -4,6 +4,7 @@
   border: 0.06rem solid $box-border-color;
   box-shadow: 0.13rem 0.13rem 0.5rem $box-shadow-color;
   border-radius: 0.13rem;
+  box-sizing: border-box;
 }
 
 .profile-handle {
