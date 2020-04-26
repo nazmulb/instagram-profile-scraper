@@ -24,7 +24,9 @@
       </div>
 
       <div>
-        <p>{{ profile.engagements }} ({{ profile.engagementRate }}%)</p>
+        <p>
+          {{ profile.engagements }} ({{ profile.engagementRate | tofixed }}%)
+        </p>
         <p>Engagements (Engagement rate)</p>
       </div>
     </div>
@@ -32,7 +34,10 @@
 </template>
 
 <script>
+import FiltersMixin from "@/mixins/FiltersMixin";
+
 export default {
+  mixins: [FiltersMixin],
   props: {
     profile: {
       type: Object,

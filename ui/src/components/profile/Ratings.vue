@@ -40,14 +40,17 @@
         height="12"
         alt="all_inclusive"
       />
-      <p>{{ engagementRate }}%</p>
+      <p>{{ engagementRate | tofixed }}%</p>
       <p>Engagement Rate</p>
     </div>
   </div>
 </template>
 
 <script>
+import FiltersMixin from "@/mixins/FiltersMixin";
+
 export default {
+  mixins: [FiltersMixin],
   props: {
     following: {
       type: Number,
