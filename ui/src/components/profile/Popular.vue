@@ -2,19 +2,13 @@
   <div class="box-card profile-popular-hashtags">
     <h6 class="section-header">Popular #hashtags and @mentions</h6>
     <p class="popular-hashtags">
-      <span
-        v-for="(val, index) in hashtagsArray"
-        :key="index"
-        class="tag-item"
-        >{{ val }}</span
+      <span v-for="(val, index) in hashtagsArray" :key="index" class="tag-item"
+        >#{{ val }}</span
       >
     </p>
     <p class="popular-mentions">
-      <span
-        v-for="(val, index) in mentionsArray"
-        :key="index"
-        class="tag-item"
-        >{{ val }}</span
+      <span v-for="(val, index) in mentionsArray" :key="index" class="tag-item"
+        >@{{ val }}</span
       >
     </p>
   </div>
