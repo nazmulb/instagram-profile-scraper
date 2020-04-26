@@ -4,14 +4,17 @@
     <ul class="list-group">
       <li v-for="interest in interests" :key="interest.id" class="list-item">
         <span>{{ interest.topic }}</span>
-        <span>{{ interest.interestRatio }}%</span>
+        <span>{{ interest.interestRatio | tofixed }}%</span>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import FiltersMixin from "@/mixins/FiltersMixin";
+
 export default {
+  mixins: [FiltersMixin],
   props: {
     interests: {
       type: Array,

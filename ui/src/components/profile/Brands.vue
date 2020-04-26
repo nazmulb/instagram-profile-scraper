@@ -4,14 +4,17 @@
     <ul class="list-group">
       <li v-for="brand in brands" :key="brand.id" class="list-item">
         <span>{{ brand.name }}</span>
-        <span>{{ brand.sentimentRatio }}%</span>
+        <span>{{ brand.sentimentRatio | tofixed }}%</span>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import FiltersMixin from "@/mixins/FiltersMixin";
+
 export default {
+  mixins: [FiltersMixin],
   props: {
     brands: {
       type: Array,

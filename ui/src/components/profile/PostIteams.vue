@@ -1,6 +1,6 @@
 <template>
   <div class="box-card">
-    <p>{{ post.takenAtTimestamp }}</p>
+    <p>{{ post.takenAtTimestamp | todate }}</p>
     <p v-if="!post.isVideo">
       <img
         :src="post.thumbnailUrl"
@@ -56,7 +56,10 @@
 </template>
 
 <script>
+import FiltersMixin from "@/mixins/FiltersMixin";
+
 export default {
+  mixins: [FiltersMixin],
   props: {
     post: {
       type: Object,
