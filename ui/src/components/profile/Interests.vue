@@ -3,7 +3,7 @@
     <h6 class="section-header">Interests</h6>
     <ul class="list-group">
       <li v-for="interest in interests" :key="interest.id" class="list-item">
-        <span class="list-item-name">{{ interest.topic }}</span>
+        <span class="list-item-name">{{ interest.topic | truncate(35) }}</span>
         <span class="list-item-ratio"
           >{{ interest.interestRatio | tofixed }}%</span
         >

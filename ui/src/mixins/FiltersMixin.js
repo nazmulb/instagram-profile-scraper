@@ -1,3 +1,5 @@
+import truncate from "lodash/truncate";
+
 export default {
   filters: {
     tofixed(value) {
@@ -37,6 +39,13 @@ export default {
         : isAfterThousand
         ? value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
         : Math.abs(Number(value));
+    },
+    truncate(value, length = 50) {
+      if (!value) return "";
+
+      return truncate(value, {
+        length: length
+      });
     }
   }
 };

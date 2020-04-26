@@ -3,7 +3,7 @@
     <h6 class="section-header">Brand affinity</h6>
     <ul class="list-group">
       <li v-for="brand in brands" :key="brand.id" class="list-item">
-        <span class="list-item-name">{{ brand.name }}</span>
+        <span class="list-item-name">{{ brand.name | truncate(35) }}</span>
         <span class="list-item-ratio"
           >{{ brand.sentimentRatio | tofixed }}%</span
         >

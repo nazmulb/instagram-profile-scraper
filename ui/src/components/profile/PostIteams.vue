@@ -72,6 +72,7 @@ export default {
 .box-card {
   padding: 0.5rem 0;
   margin-right: 0.3rem;
+  margin-bottom: 0.3rem;
 
   .post-date,
   .posts-img,
