@@ -34,7 +34,10 @@
 <script>
 export default {
   props: {
-    profile: Object
+    profile: {
+      type: Object,
+      required: true
+    }
   }
 };
 </script>
