@@ -31,7 +31,7 @@
           height="11"
           alt="play"
         />
-        {{ post.videoViewCount }}
+        {{ post.videoViewCount | formatnumber }}
       </span>
       <span>
         <img
@@ -40,7 +40,7 @@
           height="10"
           alt="likes"
         />
-        {{ post.totalLikes }}
+        {{ post.totalLikes | formatnumber }}
       </span>
       <span>
         <img
@@ -49,7 +49,7 @@
           height="12"
           alt="comments"
         />
-        {{ post.totalComments }}
+        {{ post.totalComments | formatnumber }}
       </span>
     </p>
   </div>

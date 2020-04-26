@@ -19,13 +19,15 @@
       </div>
 
       <div>
-        <p>{{ profile.followers }}</p>
+        <p>{{ profile.followers | commarize }}</p>
         <p>Followers</p>
       </div>
 
       <div>
         <p>
-          {{ profile.engagements }} ({{ profile.engagementRate | tofixed }}%)
+          {{ profile.engagements | commarize }} ({{
+            profile.engagementRate | tofixed
+          }}%)
         </p>
         <p>Engagements (Engagement rate)</p>
       </div>

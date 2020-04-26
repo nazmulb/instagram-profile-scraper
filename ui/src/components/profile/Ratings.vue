@@ -7,7 +7,7 @@
         height="14"
         alt="group"
       />
-      <p>{{ following }}</p>
+      <p>{{ following | commarize }}</p>
       <p>Following</p>
     </div>
 
@@ -18,7 +18,7 @@
         height="14"
         alt="group"
       />
-      <p>{{ followers }}</p>
+      <p>{{ followers | commarize }}</p>
       <p>Followers</p>
     </div>
 
@@ -29,7 +29,7 @@
         height="18"
         alt="favorite"
       />
-      <p>{{ avgLikes }}</p>
+      <p>{{ avgLikes | commarize }}</p>
       <p>Avg Likes</p>
     </div>
 
