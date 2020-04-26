@@ -3,8 +3,8 @@
     class="modash-profile-link"
     :to="{ name: 'profile', params: { id: profile.id } }"
   >
-    <div class="box-card list">
-      <div class="profile-picture">
+    <div class="box-card row no-gutters list">
+      <div class="col col-sm-1 align-self-start profile-picture">
         <img
           :src="profile.profilePicUrl"
           width="50"
@@ -13,23 +13,23 @@
         />
       </div>
 
-      <div>
-        <h5 class="profile-name">{{ profile.name }}</h5>
-        <p class="profile-handle">@{{ profile.username }}</p>
+      <div class="col col-sm-4">
+        <h5 class="text">{{ profile.name }}</h5>
+        <p class="profile-handle label">@{{ profile.username }}</p>
       </div>
 
-      <div>
-        <p>{{ profile.followers | commarize }}</p>
-        <p>Followers</p>
+      <div class="col">
+        <p class="text">{{ profile.followers | commarize }}</p>
+        <p class="label">Followers</p>
       </div>
 
-      <div>
-        <p>
+      <div class="col col-sm-5">
+        <p class="text">
           {{ profile.engagements | commarize }} ({{
             profile.engagementRate | tofixed
           }}%)
         </p>
-        <p>Engagements (Engagement rate)</p>
+        <p class="label">Engagements (Engagement rate)</p>
       </div>
     </div>
   </router-link>
@@ -62,17 +62,32 @@ export default {
   }
 
   .list {
-    font-weight: 400;
     margin-bottom: 1rem;
-    min-height: 5rem;
     transition: all 0.2s linear;
     cursor: pointer;
-  }
 
-  .list:hover {
-    transform: scale(1.01);
-    box-shadow: 0 0.19rem 0.75rem 0 rgba(0, 0, 0, 0.2),
-      0 0.06rem 0.9rem 0 rgba(0, 0, 0, 0.19);
+    &:hover {
+      transform: scale(1.01);
+      box-shadow: 0 0.19rem 0.75rem 0 rgba(0, 0, 0, 0.2),
+        0 0.06rem 0.9rem 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .profile-picture {
+      margin-right: 0.5rem;
+    }
+
+    .text {
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+
+    .label {
+      font-size: 0.87rem;
+      color: #828282;
+      font-weight: 400;
+      margin-bottom: 0;
+    }
   }
 }
 </style>
