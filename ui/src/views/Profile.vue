@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-center modash-profile">
+  <div class="row no-gutters justify-content-center modash-profile">
     <div class="col-12 col-sm-8 col-lg-7">
       <Spinner v-if="getLoading" />
       <div v-else>

@@ -4,15 +4,15 @@
     <p class="posts-img" v-if="!post.isVideo">
       <img
         :src="post.thumbnailUrl"
-        width="193"
-        height="168"
+        width="197"
+        height="170"
         alt="Post Picture"
       />
     </p>
     <p class="posts-video" v-if="post.isVideo">
       <video
-        width="193"
-        height="168"
+        width="197"
+        height="170"
         controls
         controlslist="nodownload"
         playsinline
@@ -83,7 +83,7 @@ export default {
 
   .posts-img,
   .posts-video {
-    height: 10.5rem;
+    height: 10.6rem;
   }
 
   .post-date {
