@@ -46,6 +46,7 @@ export default {
 <style lang="scss" scoped>
 .profile-popular-hashtags {
   text-align: left;
+  margin-bottom: 1rem;
 
   .section-header {
     margin-bottom: 1rem;
@@ -61,7 +62,7 @@ export default {
     background: #114b5f;
     border-radius: 2rem;
     color: #fff;
-    font-size: 0.87rem;
+    font-size: 0.75rem;
     font-weight: 400;
   }
 }

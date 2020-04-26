@@ -22,4 +22,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.modash-main {
+  margin-bottom: 0.5rem;
+}
+</style>

@@ -1,19 +1,18 @@
 <template>
-  <div class="box-card">
-    <p>{{ post.takenAtTimestamp | todate }}</p>
-    <p v-if="!post.isVideo">
+  <div class="col box-card">
+    <p class="post-date">{{ post.takenAtTimestamp | todate }}</p>
+    <p class="posts-img" v-if="!post.isVideo">
       <img
         :src="post.thumbnailUrl"
-        width="215"
-        height="190"
+        width="193"
+        height="168"
         alt="Post Picture"
       />
     </p>
-    <p v-if="post.isVideo">
+    <p class="posts-video" v-if="post.isVideo">
       <video
-        class="posts-video"
-        width="215"
-        height="190"
+        width="193"
+        height="168"
         controls
         controlslist="nodownload"
         playsinline
@@ -23,7 +22,7 @@
         :src="post.videoUrl"
       ></video>
     </p>
-    <p>
+    <p class="post-ratings">
       <span v-if="post.isVideo">
         <img
           src="../../assets/images/play.svg"
@@ -31,7 +30,7 @@
           height="11"
           alt="play"
         />
-        {{ post.videoViewCount | formatnumber }}
+        {{ post.videoViewCount | commarize(true) }}
       </span>
       <span>
         <img
@@ -40,7 +39,7 @@
           height="10"
           alt="likes"
         />
-        {{ post.totalLikes | formatnumber }}
+        {{ post.totalLikes | commarize(true) }}
       </span>
       <span>
         <img
@@ -49,7 +48,7 @@
           height="12"
           alt="comments"
         />
-        {{ post.totalComments | formatnumber }}
+        {{ post.totalComments | commarize(true) }}
       </span>
     </p>
   </div>
@@ -69,4 +68,37 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.box-card {
+  padding: 0.5rem 0;
+  margin-right: 0.3rem;
+
+  .post-date,
+  .posts-img,
+  .posts-video,
+  .post-ratings {
+    margin: 0;
+    text-align: left;
+  }
+
+  .post-date {
+    padding-left: 0.5rem;
+    padding-bottom: 0.3rem;
+    font-size: 0.75rem;
+    color: #757575;
+  }
+
+  .post-ratings {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 0.3rem;
+    padding-left: 0.5rem;
+    font-size: 0.75rem;
+
+    span {
+      display: inline-block;
+      padding-right: 0.5rem;
+    }
+  }
+}
+</style>

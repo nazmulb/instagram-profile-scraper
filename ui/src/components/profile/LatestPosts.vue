@@ -7,7 +7,9 @@
       alt="instagram"
     />
     <h6 class="section-header">Latest posts</h6>
-    <PostIteams v-for="post in posts" :key="post.id" :post="post" />
+    <div class="row no-gutters">
+      <PostIteams v-for="post in posts" :key="post.id" :post="post" />
+    </div>
   </div>
 </template>
 

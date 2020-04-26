@@ -23,18 +23,20 @@ export default {
       ];
       return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
     },
-    commarize(value) {
+    formatnumber(value) {
+      if (!value) return 0;
+      return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    },
+    commarize(value, isAfterThousand = false) {
       return Math.abs(Number(value)) >= 1.0e9
         ? (Math.abs(Number(value)) / 1.0e9).toFixed(1) + "B"
         : Math.abs(Number(value)) >= 1.0e6
         ? (Math.abs(Number(value)) / 1.0e6).toFixed(1) + "M"
-        : Math.abs(Number(value)) >= 1.0e3
+        : Math.abs(Number(value)) >= 1.0e3 && !isAfterThousand
         ? (Math.abs(Number(value)) / 1.0e3).toFixed(1) + "K"
+        : isAfterThousand
+        ? value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
         : Math.abs(Number(value));
-    },
-    formatnumber(value) {
-      if (!value) return 0;
-      return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
   }
 };
