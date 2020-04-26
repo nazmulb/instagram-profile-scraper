@@ -1,10 +1,12 @@
 <template>
-  <div class="box-card box-interests">
+  <div class="col box-card box-interests">
     <h6 class="section-header">Interests</h6>
     <ul class="list-group">
       <li v-for="interest in interests" :key="interest.id" class="list-item">
-        <span>{{ interest.topic }}</span>
-        <span>{{ interest.interestRatio | tofixed }}%</span>
+        <span class="list-item-name">{{ interest.topic }}</span>
+        <span class="list-item-ratio"
+          >{{ interest.interestRatio | tofixed }}%</span
+        >
       </li>
     </ul>
   </div>
@@ -27,6 +29,11 @@ export default {
 <style lang="scss" scoped>
 .box-interests {
   text-align: left;
+  padding: 0.8rem;
   margin-bottom: 1rem;
+
+  .section-header {
+    margin-bottom: 1rem;
+  }
 }
 </style>

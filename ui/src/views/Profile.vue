@@ -38,7 +38,7 @@
             :mentions="getProfile.popularMentions"
           />
 
-          <div class="profile-brand">
+          <div class="row no-gutters profile-brand">
             <Brands
               v-if="getProfile.brands && getProfile.brands.length"
               :brands="getProfile.brands"

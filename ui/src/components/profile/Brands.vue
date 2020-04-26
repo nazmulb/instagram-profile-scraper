@@ -1,10 +1,12 @@
 <template>
-  <div class="box-card box-brand">
+  <div class="col box-card box-brand">
     <h6 class="section-header">Brand affinity</h6>
     <ul class="list-group">
       <li v-for="brand in brands" :key="brand.id" class="list-item">
-        <span>{{ brand.name }}</span>
-        <span>{{ brand.sentimentRatio | tofixed }}%</span>
+        <span class="list-item-name">{{ brand.name }}</span>
+        <span class="list-item-ratio"
+          >{{ brand.sentimentRatio | tofixed }}%</span
+        >
       </li>
     </ul>
   </div>
@@ -27,6 +29,12 @@ export default {
 <style lang="scss" scoped>
 .box-brand {
   text-align: left;
+  padding: 0.8rem;
   margin-bottom: 1rem;
+  margin-right: 0.5rem;
+
+  .section-header {
+    margin-bottom: 1rem;
+  }
 }
 </style>

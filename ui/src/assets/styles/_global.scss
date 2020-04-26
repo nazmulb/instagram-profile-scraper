@@ -25,3 +25,13 @@
 ul.list-group {
   list-style: none;
 }
+
+li.list-item {
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+
+  .list-item-ratio {
+    color: $list-item-ratio-color;
+  }
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="box-card profile-popular-hashtags">
     <h6 class="section-header">Popular #hashtags and @mentions</h6>
-    <p>
+    <p class="popular-hashtags">
       <span
         v-for="(val, index) in hashtagsArray"
         :key="index"
@@ -9,7 +9,7 @@
         >{{ val }}</span
       >
     </p>
-    <p>
+    <p class="popular-mentions">
       <span
         v-for="(val, index) in mentionsArray"
         :key="index"
@@ -46,14 +46,20 @@ export default {
 <style lang="scss" scoped>
 .profile-popular-hashtags {
   text-align: left;
+  padding: 0.8rem;
   margin-bottom: 1rem;
 
   .section-header {
     margin-bottom: 1rem;
   }
-  p {
+
+  .popular-hashtags {
     margin-bottom: 0.5rem;
   }
+  .popular-mentions {
+    margin-bottom: 0;
+  }
+
   .tag-item {
     display: inline-block;
     margin-right: 0.3rem;
