@@ -1,8 +1,22 @@
 <template>
   <div class="box-card profile-popular-hashtags">
     <h6 class="section-header">Popular #hashtags and @mentions</h6>
-    <p>{{ hashtags }}</p>
-    <p>{{ mentions }}</p>
+    <p>
+      <span
+        v-for="(val, index) in hashtagsArray"
+        :key="index"
+        class="tag-item"
+        >{{ val }}</span
+      >
+    </p>
+    <p>
+      <span
+        v-for="(val, index) in mentionsArray"
+        :key="index"
+        class="tag-item"
+        >{{ val }}</span
+      >
+    </p>
   </div>
 </template>
 
@@ -17,8 +31,38 @@ export default {
       type: String,
       required: true
     }
+  },
+  computed: {
+    hashtagsArray() {
+      return this.hashtags.split("|");
+    },
+    mentionsArray() {
+      return this.mentions.split("|");
+    }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.profile-popular-hashtags {
+  text-align: left;
+
+  .section-header {
+    margin-bottom: 1rem;
+  }
+  p {
+    margin-bottom: 0.5rem;
+  }
+  .tag-item {
+    display: inline-block;
+    margin-right: 0.3rem;
+    padding: 0 0.5rem;
+    line-height: 1.5rem;
+    background: #114b5f;
+    border-radius: 2rem;
+    color: #fff;
+    font-size: 0.87rem;
+    font-weight: 400;
+  }
+}
+</style>
