@@ -25,7 +25,6 @@ export class Util {
     const sortedMap = new Map<string, number>(
       [...unsortedMap.entries()].sort((a, b) => b[1] - a[1]),
     );
-
     return Array.from(sortedMap.keys());
   }
 }
