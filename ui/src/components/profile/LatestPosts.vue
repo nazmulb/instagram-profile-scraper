@@ -1,12 +1,14 @@
 <template>
   <div class="profile-latest-posts">
-    <img
-      src="../../assets/images/instagram.svg"
-      width="13"
-      height="13"
-      alt="instagram"
-    />
-    <h6 class="section-header">Latest posts</h6>
+    <div class="posts-header">
+      <img
+        src="../../assets/images/instagram.svg"
+        width="13"
+        height="13"
+        alt="instagram"
+      />
+      <h6 class="section-header">Latest posts</h6>
+    </div>
     <div class="row no-gutters">
       <PostIteams v-for="post in posts" :key="post.id" :post="post" />
     </div>
@@ -29,4 +31,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.profile-latest-posts {
+  .posts-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    .section-header {
+      margin-left: 0.3rem;
+      margin-bottom: 0;
+    }
+  }
+}
+</style>

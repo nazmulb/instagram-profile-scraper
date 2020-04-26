@@ -1,5 +1,5 @@
 <template>
-  <div class="box-card">
+  <div class="box-card box-brand">
     <h6 class="section-header">Brand affinity</h6>
     <ul class="list-group">
       <li v-for="brand in brands" :key="brand.id" class="list-item">
@@ -24,4 +24,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.box-brand {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+</style>

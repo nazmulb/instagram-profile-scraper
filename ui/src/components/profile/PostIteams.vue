@@ -81,6 +81,11 @@ export default {
     text-align: left;
   }
 
+  .posts-img,
+  .posts-video {
+    height: 10.5rem;
+  }
+
   .post-date {
     padding-left: 0.5rem;
     padding-bottom: 0.3rem;
