@@ -3,7 +3,7 @@
     class="modash-profile-link"
     :to="{ name: 'profile', params: { id: profile.id } }"
   >
-    <div class="box-card row no-gutters list">
+    <div class="row no-gutters box-card list">
       <div class="col col-sm-1 align-self-start profile-picture">
         <img
           :src="profile.profilePicUrl"
@@ -14,7 +14,7 @@
       </div>
 
       <div class="col col-sm-4">
-        <h5 class="text">{{ profile.name }}</h5>
+        <p class="text">{{ profile.name }}</p>
         <p class="profile-handle label">@{{ profile.username }}</p>
       </div>
 
@@ -83,7 +83,7 @@ export default {
     }
 
     .label {
-      font-size: 0.87rem;
+      font-size: 0.75rem;
       color: #828282;
       font-weight: 400;
       margin-bottom: 0;

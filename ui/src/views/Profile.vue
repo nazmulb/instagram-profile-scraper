@@ -100,6 +100,21 @@ export default {
   }
   .profile-container {
     text-align: center;
+
+    .profile-picture {
+      margin-top: -5rem;
+    }
+
+    .profile-name {
+      margin-top: 1rem;
+      font-weight: 400;
+    }
+
+    .profile-handle {
+      font-size: 0.75rem;
+      font-weight: 400;
+      margin-bottom: 1.8rem;
+    }
   }
 }
 </style>
