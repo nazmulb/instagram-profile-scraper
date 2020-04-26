@@ -9,6 +9,7 @@ import {
 } from '../repositories';
 import { Profile, Post, Brand, Interest } from '../entities';
 import { Instagram } from '../interfaces';
+import { Util } from '../libraries';
 import { encode } from 'punycode';
 
 @Injectable()
@@ -47,8 +48,8 @@ export class AnalyzeService {
             engagements: 0,
             engagementRate: 0,
             avgLikes: 0,
-            popularHashtags: '',
-            popularMentions: '',
+            popularHashtags: new Map<string, number>(),
+            popularMentions: new Map<string, number>(),
           };
 
           profile = new Profile();
@@ -71,6 +72,16 @@ export class AnalyzeService {
 
               analyze.totalLikes += iposts.node.edge_media_preview_like.count;
               analyze.totalComments += iposts.node.edge_media_to_comment.count;
+
+              Util.getHashTagsOrMentions(
+                iposts.node.edge_media_to_caption.edges[0].node.text,
+                analyze.popularHashtags,
+              );
+              Util.getHashTagsOrMentions(
+                iposts.node.edge_media_to_caption.edges[0].node.text,
+                analyze.popularMentions,
+                true,
+              );
 
               // save only first 3 posts into database
               if (postCount <= 3) {
@@ -117,6 +128,12 @@ export class AnalyzeService {
           profile.engagements = analyze.engagements;
           profile.engagementRate = analyze.engagementRate;
           profile.avgLikes = analyze.avgLikes;
+
+          const hashtags = Util.getSortedArrayFromMap(analyze.popularHashtags);
+          profile.popularHashtags = hashtags.slice(0, 5).join('|');
+
+          const mentions = Util.getSortedArrayFromMap(analyze.popularMentions);
+          profile.popularMentions = mentions.slice(0, 5).join('|');
 
           const brand: Brand = new Brand();
           brand.profile = profile;
