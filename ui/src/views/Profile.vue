@@ -25,95 +25,29 @@
           <h5 class="profile-name">{{ getProfile.name }}</h5>
           <p class="profile-handle">@{{ getProfile.username }}</p>
 
-          <div class="profile-rating">
-            <div class="box-card">
-              <img
-                src="../assets/images/group.svg"
-                width="26"
-                height="14"
-                alt="group"
-              />
-              <p>{{ getProfile.following }}</p>
-              <p>Following</p>
-            </div>
+          <Ratings
+            :following="getProfile.following"
+            :followers="getProfile.followers"
+            :avgLikes="getProfile.avgLikes"
+            :engagementRate="getProfile.engagementRate"
+          />
 
-            <div class="box-card">
-              <img
-                src="../assets/images/group.svg"
-                width="26"
-                height="14"
-                alt="group"
-              />
-              <p>{{ getProfile.followers }}</p>
-              <p>Followers</p>
-            </div>
-
-            <div class="box-card">
-              <img
-                src="../assets/images/favorite.svg"
-                width="24"
-                height="18"
-                alt="favorite"
-              />
-              <p>{{ getProfile.avgLikes }}</p>
-              <p>Avg Likes</p>
-            </div>
-
-            <div class="box-card">
-              <img
-                src="../assets/images/all_inclusive.svg"
-                width="29"
-                height="12"
-                alt="all_inclusive"
-              />
-              <p>{{ getProfile.engagementRate }}%</p>
-              <p>Engagement Rate</p>
-            </div>
-          </div>
-
-          <div
+          <Popular
             v-if="getProfile.popularHashtags || getProfile.popularMentions"
-            class="box-card profile-popular-hashtags"
-          >
-            <h6 class="section-header">Popular #hashtags and @mentions</h6>
-            <p>{{ getProfile.popularHashtags }}</p>
-            <p>{{ getProfile.popularMentions }}</p>
-          </div>
+            :hashtags="getProfile.popularHashtags"
+            :mentions="getProfile.popularMentions"
+          />
 
           <div class="profile-brand">
-            <div
+            <Brands
               v-if="getProfile.brands && getProfile.brands.length"
-              class="box-card"
-            >
-              <h6 class="section-header">Brand affinity</h6>
-              <ul class="list-group">
-                <li
-                  v-for="brand in getProfile.brands"
-                  :key="brand.id"
-                  class="list-item"
-                >
-                  <span>{{ brand.name }}</span>
-                  <span>{{ brand.sentimentRatio }}%</span>
-                </li>
-              </ul>
-            </div>
+              :brands="getProfile.brands"
+            />
 
-            <div
+            <Interests
               v-if="getProfile.interests && getProfile.interests.length"
-              class="box-card"
-            >
-              <h6 class="section-header">Interests</h6>
-              <ul class="list-group">
-                <li
-                  v-for="interest in getProfile.interests"
-                  :key="interest.id"
-                  class="list-item"
-                >
-                  <span>{{ interest.topic }}</span>
-                  <span>{{ interest.interestRatio }}%</span>
-                </li>
-              </ul>
-            </div>
+              :interests="getProfile.interests"
+            />
           </div>
 
           <LatestPosts
@@ -129,11 +63,19 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import LatestPosts from "@/components/profile/LatestPosts.vue";
+import Interests from "@/components/profile/Interests.vue";
+import Brands from "@/components/profile/Brands.vue";
+import Popular from "@/components/profile/Popular.vue";
+import Ratings from "@/components/profile/Ratings.vue";
 
 export default {
   name: "Profile",
   components: {
-    LatestPosts
+    LatestPosts,
+    Interests,
+    Brands,
+    Popular,
+    Ratings
   },
   props: {
     id: {
