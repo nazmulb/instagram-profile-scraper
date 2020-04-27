@@ -1,4 +1,3 @@
-import { AnalyzeController } from './analyze.controller';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import axios from '../axios';
 import {
