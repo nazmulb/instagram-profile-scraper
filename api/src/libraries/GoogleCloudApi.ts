@@ -33,35 +33,20 @@ export class GoogleCloudApi {
     const entities: GoogleCloud.Entity[] = result.entities;
     const categories: GoogleCloud.ClassificationCategory[] = result.categories;
 
-    // console.dir(entities);
-    // console.dir(categories);
-
     const returnData: GoogleCloud.BrandAndInterests = {
       brands: new Map<string, number>(),
       interests: new Map<string, number>(),
     };
 
-    // console.log('Entities and sentiments:');
     entities.forEach(entity => {
-      if (entity.type === 'ORGANIZATION' && entity.sentiment.score > 0) {
+      if (entity.type === 'ORGANIZATION' && entity.sentiment.score >= 0) {
         returnData.brands.set(entity.name, entity.sentiment.score * 100);
-        /*console.log(`Name: ${entity.name}`);
-        console.log(
-          `Score: ${entity.sentiment.score}, Ratio: ${entity.sentiment.score *
-            100}%`,
-        );*/
       }
     });
 
-    // console.log('Text Classification:');
     categories.forEach(category => {
-      if (category.confidence > 0) {
+      if (category.confidence >= 0) {
         returnData.interests.set(category.name, category.confidence * 100);
-        /*console.log(
-          `Name: ${category.name}, Confidence: ${
-            category.confidence
-          }, Ratio: ${category.confidence * 100}%`,
-        );*/
       }
     });
 

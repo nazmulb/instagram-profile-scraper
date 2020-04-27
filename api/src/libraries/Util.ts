@@ -33,4 +33,8 @@ export class Util {
   static getArrayFromMap(map: Map<string, number>): string[] {
     return Array.from(map.keys());
   }
+
+  static filterText(text: string): string {
+    return text.replace(/[^\w\s\?\.&\/\\,';"+():*<>$%!=-\[\]@#~`|]/gi, '');
+  }
 }

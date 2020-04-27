@@ -9,7 +9,6 @@ import {
 import { Profile, Post, Brand, Interest } from '../entities';
 import { Instagram, GoogleCloud } from '../interfaces';
 import { GoogleCloudApi, Util } from '../libraries';
-import { encode } from 'punycode';
 
 @Injectable()
 export class AnalyzeService {
@@ -99,7 +98,7 @@ export class AnalyzeService {
                 post.thumbnailUrl = iposts.node.thumbnail_src;
                 post.totalLikes = iposts.node.edge_media_preview_like.count;
                 post.totalComments = iposts.node.edge_media_to_comment.count;
-                post.postText = encode(postText);
+                post.postText = Util.filterText(postText);
 
                 if (post.isVideo) {
                   const postVideoData: Instagram.Post = await this.scrapeVideoInfoFromPost(
@@ -141,15 +140,12 @@ export class AnalyzeService {
               analyze.allPostText,
             );
 
-            // console.log(analyze.allPostText);
-            // console.dir(dataBrandAndInt);
-
             if (dataBrandAndInt.brands && dataBrandAndInt.brands.size > 0) {
               const brands = Util.getSortedMap(dataBrandAndInt.brands);
               for (const [indexKey, val] of brands.entries()) {
                 const brand: Brand = new Brand();
                 brand.profile = profile;
-                brand.name = encode(indexKey);
+                brand.name = Util.filterText(indexKey);
                 brand.sentimentRatio = val;
                 await this.brandRepository.save(brand);
               }
@@ -163,7 +159,7 @@ export class AnalyzeService {
               for (const [indexKey, val] of interests.entries()) {
                 const interest: Interest = new Interest();
                 interest.profile = profile;
-                interest.topic = encode(indexKey);
+                interest.topic = Util.filterText(indexKey);
                 interest.interestRatio = val;
                 await this.interestRepository.save(interest);
               }
