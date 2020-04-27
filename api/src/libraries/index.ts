@@ -1,2 +1,4 @@
 import { Util } from './Util';
-export { Util };
+import { GoogleCloudApi } from './GoogleCloudApi';
+
+export { GoogleCloudApi, Util };

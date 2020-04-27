@@ -8,7 +8,7 @@ import {
 } from '../repositories';
 import { Profile, Post, Brand, Interest } from '../entities';
 import { Instagram } from '../interfaces';
-import { Util } from '../libraries';
+import { GoogleCloudApi, Util } from '../libraries';
 import { encode } from 'punycode';
 
 @Injectable()
@@ -49,6 +49,7 @@ export class AnalyzeService {
             avgLikes: 0,
             popularHashtags: new Map<string, number>(),
             popularMentions: new Map<string, number>(),
+            allPostText: '',
           };
 
           profile = new Profile();
@@ -69,15 +70,18 @@ export class AnalyzeService {
               const iposts: Instagram.Posts =
                 profileData.edge_owner_to_timeline_media.edges[key];
 
+              const postText =
+                iposts.node.edge_media_to_caption.edges.length > 0
+                  ? iposts.node.edge_media_to_caption.edges[0].node.text
+                  : '';
+
               analyze.totalLikes += iposts.node.edge_media_preview_like.count;
               analyze.totalComments += iposts.node.edge_media_to_comment.count;
+              analyze.allPostText += postText;
 
+              Util.getHashTagsOrMentions(postText, analyze.popularHashtags);
               Util.getHashTagsOrMentions(
-                iposts.node.edge_media_to_caption.edges[0].node.text,
-                analyze.popularHashtags,
-              );
-              Util.getHashTagsOrMentions(
-                iposts.node.edge_media_to_caption.edges[0].node.text,
+                postText,
                 analyze.popularMentions,
                 true,
               );
@@ -93,11 +97,7 @@ export class AnalyzeService {
                 post.thumbnailUrl = iposts.node.thumbnail_src;
                 post.totalLikes = iposts.node.edge_media_preview_like.count;
                 post.totalComments = iposts.node.edge_media_to_comment.count;
-                if (iposts.node.edge_media_to_caption.edges.length > 0) {
-                  post.postText = encode(
-                    iposts.node.edge_media_to_caption.edges[0].node.text,
-                  );
-                }
+                post.postText = encode(postText);
 
                 if (post.isVideo) {
                   const postVideoData: Instagram.Post = await this.scrapeVideoInfoFromPost(
@@ -134,17 +134,26 @@ export class AnalyzeService {
           const mentions = Util.getSortedArrayFromMap(analyze.popularMentions);
           profile.popularMentions = mentions.slice(0, 5).join('|');
 
-          const brand: Brand = new Brand();
-          brand.profile = profile;
-          brand.name = 'Apple';
-          brand.sentimentRatio = 16.51;
-          await this.brandRepository.save(brand);
+          if (analyze.allPostText && analyze.allPostText.length > 0) {
+            const dataBrandAndInt = await GoogleCloudApi.getBrandAffinityAndInterests(
+              analyze.allPostText,
+            );
 
-          const interest: Interest = new Interest();
-          interest.profile = profile;
-          interest.topic = 'Camera & photography';
-          interest.interestRatio = 49.84;
-          await this.interestRepository.save(interest);
+            // console.log(analyze.allPostText);
+            // console.dir(dataBrandAndInt);
+
+            const brand: Brand = new Brand();
+            brand.profile = profile;
+            brand.name = 'Apple';
+            brand.sentimentRatio = 16.51;
+            await this.brandRepository.save(brand);
+
+            const interest: Interest = new Interest();
+            interest.profile = profile;
+            interest.topic = 'Camera & photography';
+            interest.interestRatio = 49.84;
+            await this.interestRepository.save(interest);
+          }
 
           await this.profileRepository.save(profile);
           return {

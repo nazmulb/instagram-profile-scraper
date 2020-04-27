@@ -1,3 +1,4 @@
+import * as GoogleCloud from './google-cloud.interface';
 import * as Instagram from './instagram.interface';
 
-export { Instagram };
+export { GoogleCloud, Instagram };
