@@ -7,7 +7,7 @@ import {
   InterestRepository,
 } from '../repositories';
 import { Profile, Post, Brand, Interest } from '../entities';
-import { Instagram } from '../interfaces';
+import { Instagram, GoogleCloud } from '../interfaces';
 import { GoogleCloudApi, Util } from '../libraries';
 import { encode } from 'punycode';
 
@@ -79,12 +79,14 @@ export class AnalyzeService {
               analyze.totalComments += iposts.node.edge_media_to_comment.count;
               analyze.allPostText += postText;
 
-              Util.getHashTagsOrMentions(postText, analyze.popularHashtags);
-              Util.getHashTagsOrMentions(
-                postText,
-                analyze.popularMentions,
-                true,
-              );
+              if (postText) {
+                Util.getHashTagsOrMentions(postText, analyze.popularHashtags);
+                Util.getHashTagsOrMentions(
+                  postText,
+                  analyze.popularMentions,
+                  true,
+                );
+              }
 
               // save only first 3 posts into database
               if (postCount <= 3) {
@@ -135,24 +137,37 @@ export class AnalyzeService {
           profile.popularMentions = mentions.slice(0, 5).join('|');
 
           if (analyze.allPostText && analyze.allPostText.length > 0) {
-            const dataBrandAndInt = await GoogleCloudApi.getBrandAffinityAndInterests(
+            const dataBrandAndInt: GoogleCloud.BrandAndInterests = await GoogleCloudApi.getBrandAffinityAndInterests(
               analyze.allPostText,
             );
 
             // console.log(analyze.allPostText);
             // console.dir(dataBrandAndInt);
 
-            const brand: Brand = new Brand();
-            brand.profile = profile;
-            brand.name = 'Apple';
-            brand.sentimentRatio = 16.51;
-            await this.brandRepository.save(brand);
+            if (dataBrandAndInt.brands && dataBrandAndInt.brands.size > 0) {
+              const brands = Util.getSortedMap(dataBrandAndInt.brands);
+              for (const [indexKey, val] of brands.entries()) {
+                const brand: Brand = new Brand();
+                brand.profile = profile;
+                brand.name = encode(indexKey);
+                brand.sentimentRatio = val;
+                await this.brandRepository.save(brand);
+              }
+            }
 
-            const interest: Interest = new Interest();
-            interest.profile = profile;
-            interest.topic = 'Camera & photography';
-            interest.interestRatio = 49.84;
-            await this.interestRepository.save(interest);
+            if (
+              dataBrandAndInt.interests &&
+              dataBrandAndInt.interests.size > 0
+            ) {
+              const interests = Util.getSortedMap(dataBrandAndInt.interests);
+              for (const [indexKey, val] of interests.entries()) {
+                const interest: Interest = new Interest();
+                interest.profile = profile;
+                interest.topic = encode(indexKey);
+                interest.interestRatio = val;
+                await this.interestRepository.save(interest);
+              }
+            }
           }
 
           await this.profileRepository.save(profile);

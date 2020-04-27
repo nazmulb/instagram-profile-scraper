@@ -25,7 +25,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: 123
       MYSQL_DATABASE: instagram_profile_scraper
-      API_KEY_GCP: TESTING
+      API_KEY_GCP: YOUR_KEY
   db:
     container_name: db
     image: mysql:5.7

@@ -19,12 +19,18 @@ export class Util {
     }
   }
 
-  static getSortedArrayFromMap(
-    unsortedMap: Map<string, number>,
-  ): string[] {
-    const sortedMap = new Map<string, number>(
+  static getSortedArrayFromMap(unsortedMap: Map<string, number>): string[] {
+    const sortedMap = Util.getSortedMap(unsortedMap);
+    return Util.getArrayFromMap(sortedMap);
+  }
+
+  static getSortedMap(unsortedMap: Map<string, number>): Map<string, number> {
+    return new Map<string, number>(
       [...unsortedMap.entries()].sort((a, b) => b[1] - a[1]),
     );
-    return Array.from(sortedMap.keys());
+  }
+
+  static getArrayFromMap(map: Map<string, number>): string[] {
+    return Array.from(map.keys());
   }
 }

@@ -3,6 +3,8 @@ import axios from '../axios';
 import { GoogleCloud } from '../interfaces';
 
 export class GoogleCloudApi {
+  public static apiURL: string = 'https://language.googleapis.com/v1beta2';
+
   /**
    * Get Brand Affinity and Interests
    * @param {content} content - content text
@@ -34,14 +36,14 @@ export class GoogleCloudApi {
     // console.dir(entities);
     // console.dir(categories);
 
-    const returnData = {
+    const returnData: GoogleCloud.BrandAndInterests = {
       brands: new Map<string, number>(),
       interests: new Map<string, number>(),
     };
 
     // console.log('Entities and sentiments:');
     entities.forEach(entity => {
-      if (entity.type === 'ORGANIZATION') {
+      if (entity.type === 'ORGANIZATION' && entity.sentiment.score > 0) {
         returnData.brands.set(entity.name, entity.sentiment.score * 100);
         /*console.log(`Name: ${entity.name}`);
         console.log(
@@ -53,12 +55,14 @@ export class GoogleCloudApi {
 
     // console.log('Text Classification:');
     categories.forEach(category => {
-      returnData.interests.set(category.name, category.confidence * 100);
-      /*console.log(
-        `Name: ${category.name}, Confidence: ${
-          category.confidence
-        }, Ratio: ${category.confidence * 100}%`,
-      );*/
+      if (category.confidence > 0) {
+        returnData.interests.set(category.name, category.confidence * 100);
+        /*console.log(
+          `Name: ${category.name}, Confidence: ${
+            category.confidence
+          }, Ratio: ${category.confidence * 100}%`,
+        );*/
+      }
     });
 
     return returnData;
@@ -74,7 +78,7 @@ export class GoogleCloudApi {
   ): Promise<any> {
     return axios
       .post(
-        `https://language.googleapis.com/v1beta2/documents:annotateText?key=${process.env.API_KEY_GCP}`,
+        `${GoogleCloudApi.apiURL}/documents:annotateText?key=${process.env.API_KEY_GCP}`,
         requestBody,
       )
       .then(res => res.data)

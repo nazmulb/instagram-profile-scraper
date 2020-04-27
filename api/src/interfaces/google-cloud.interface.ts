@@ -46,3 +46,8 @@ export interface ResponseBody {
   language?: string;
   categories?: ClassificationCategory[];
 }
+
+export interface BrandAndInterests {
+  brands?: Map<string, number>;
+  interests?: Map<string, number>;
+}
