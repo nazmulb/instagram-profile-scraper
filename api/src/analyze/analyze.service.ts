@@ -19,6 +19,11 @@ export class AnalyzeService {
     private readonly interestRepository: InterestRepository,
   ) {}
 
+  /**
+   * Scrape and analyze instagram profile
+   * @param {string} userHandle - user handle
+   * @returns {Promise<object>}
+   */
   async scrapeAndAnalyzeProfile(userHandle: string): Promise<object> {
     const profileData: Instagram.Profile = await this.scrapeProfile(userHandle);
 
@@ -134,6 +139,7 @@ export class AnalyzeService {
           profile.engagementRate = analyze.engagementRate;
           profile.avgLikes = analyze.avgLikes;
 
+          // save five hashtags and mentions in database
           const hashtags = Util.getSortedArrayFromMap(analyze.popularHashtags);
           profile.popularHashtags = hashtags.slice(0, 5).join('|');
 
@@ -144,12 +150,10 @@ export class AnalyzeService {
             const textsFromImages: string = await GoogleCloudApi.getTextFromImages(
               analyze.allImages,
             );
-            // console.log(textsFromImages);
 
             if (textsFromImages) {
               analyze.allPostText += textsFromImages;
             }
-            // console.log(analyze.allPostText);
           }
 
           if (analyze.allPostText && analyze.allPostText.length > 0) {

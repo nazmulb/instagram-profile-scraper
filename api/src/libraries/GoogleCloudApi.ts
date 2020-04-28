@@ -4,8 +4,7 @@ import { GoogleCloud } from '../interfaces';
 
 export class GoogleCloudApi {
   public static apiLanURL: string = 'https://language.googleapis.com/v1beta2';
-  public static apiVisionURL: string =
-    'https://vision.googleapis.com/v1p4beta1';
+  public static apiVisionURL: string = 'https://vision.googleapis.com/v1p4beta1';
 
   /**
    * Get Brand Affinity and Interests
@@ -103,10 +102,7 @@ export class GoogleCloudApi {
         requestBody,
       );
 
-      // console.dir(result);
       const entities: GoogleCloud.AnnotateImageResponse[] = result.responses;
-      // console.dir(result.responses);
-
       entities.forEach(entity => {
         returnData += entity.fullTextAnnotation
           ? entity.fullTextAnnotation.text
