@@ -78,7 +78,10 @@ export class AnalyzeService {
               analyze.totalLikes += iposts.node.edge_media_preview_like.count;
               analyze.totalComments += iposts.node.edge_media_to_comment.count;
               analyze.allPostText += postText;
-              analyze.allImages[postCount] = iposts.node.display_url;
+
+              if (iposts.node.display_url) {
+                analyze.allImages[postCount] = iposts.node.display_url;
+              }
 
               if (postText) {
                 Util.getHashTagsOrMentions(postText, analyze.popularHashtags);
@@ -137,13 +140,16 @@ export class AnalyzeService {
           const mentions = Util.getSortedArrayFromMap(analyze.popularMentions);
           profile.popularMentions = mentions.slice(0, 5).join('|');
 
-          const textsFromImages: string = await GoogleCloudApi.getTextFromImages(
-            analyze.allImages,
-          );
-          // console.log(textsFromImages);
+          if (analyze.allImages.length > 0) {
+            const textsFromImages: string = await GoogleCloudApi.getTextFromImages(
+              analyze.allImages,
+            );
+            // console.log(textsFromImages);
 
-          if (textsFromImages) {
-            analyze.allPostText += textsFromImages;
+            if (textsFromImages) {
+              analyze.allPostText += textsFromImages;
+            }
+            // console.log(analyze.allPostText);
           }
 
           if (analyze.allPostText && analyze.allPostText.length > 0) {

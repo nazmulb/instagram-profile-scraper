@@ -31,28 +31,39 @@ export class GoogleCloudApi {
       encodingType: 'UTF8',
     };
 
-    const result: GoogleCloud.ResponseBody = await this.annotateText(
-      requestBody,
-    );
-    const entities: GoogleCloud.Entity[] = result.entities;
-    const categories: GoogleCloud.ClassificationCategory[] = result.categories;
-
     const returnData: GoogleCloud.BrandAndInterests = {
       brands: new Map<string, number>(),
       interests: new Map<string, number>(),
     };
 
-    entities.forEach(entity => {
-      if (entity.type === 'ORGANIZATION' && entity.sentiment.score >= 0) {
-        returnData.brands.set(entity.name, entity.sentiment.score * 100);
-      }
-    });
+    try {
+      const result: GoogleCloud.ResponseBody = await this.annotateText(
+        requestBody,
+      );
+      const entities: GoogleCloud.Entity[] = result.entities;
+      const categories: GoogleCloud.ClassificationCategory[] =
+        result.categories;
 
-    categories.forEach(category => {
-      if (category.confidence >= 0) {
-        returnData.interests.set(category.name, category.confidence * 100);
-      }
-    });
+      entities.forEach(entity => {
+        if (entity.type === 'ORGANIZATION' && entity.sentiment.score >= 0) {
+          returnData.brands.set(entity.name, entity.sentiment.score * 100);
+        }
+      });
+
+      categories.forEach(category => {
+        if (category.confidence >= 0) {
+          returnData.interests.set(category.name, category.confidence * 100);
+        }
+      });
+    } catch (e) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_GATEWAY,
+          error: e,
+        },
+        HttpStatus.BAD_GATEWAY,
+      );
+    }
 
     return returnData;
   }
@@ -63,51 +74,53 @@ export class GoogleCloudApi {
    * @returns {Promise<string>}
    */
   static async getTextFromImages(images: string[]): Promise<string> {
-    // console.dir(images);
+    let returnData: string = '';
+    const requests = [];
+
+    images.map((img, i) => {
+      if (img) {
+        requests[i] = {
+          image: {
+            source: {
+              imageUri: img,
+            },
+          },
+          features: [
+            {
+              type: 'TEXT_DETECTION',
+            },
+          ],
+        };
+      }
+    });
+
     const requestBody: GoogleCloud.VisionRequestBody = {
-      requests: [
-        {
-          image: {
-            source: {
-              imageUri:
-                'https://instagram.ftll1-1.fna.fbcdn.net/v/t51.2885-15/e15/95096399_718187358925964_4269722698754055905_n.jpg?_nc_ht=instagram.ftll1-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=wL7OeXZHnLMAX-b-DpZ&oh=b6df7ee01dbcf390af64505159bf4add&oe=5EA977F1',
-            },
-          },
-          features: [
-            {
-              type: 'TEXT_DETECTION',
-            },
-          ],
-        },
-        {
-          image: {
-            source: {
-              imageUri:
-                'https://instagram.ftll1-1.fna.fbcdn.net/v/t51.2885-15/e35/95008798_1952679888199593_7408566697593559042_n.jpg?_nc_ht=instagram.ftll1-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=Fq4xWEEzFTMAX8V12CN&oh=e629a11f58309bcc0ea4b41c85ae6d9f&oe=5EA9E51D',
-            },
-          },
-          features: [
-            {
-              type: 'TEXT_DETECTION',
-            },
-          ],
-        },
-      ],
+      requests,
     };
 
-    const result: GoogleCloud.VisionResponseBody = await this.annotateImages(
-      requestBody,
-    );
+    try {
+      const result: GoogleCloud.VisionResponseBody = await this.annotateImages(
+        requestBody,
+      );
 
-    // console.dir(result);
-    const entities: GoogleCloud.AnnotateImageResponse[] = result.responses;
-    // console.dir(result.responses);
+      // console.dir(result);
+      const entities: GoogleCloud.AnnotateImageResponse[] = result.responses;
+      // console.dir(result.responses);
 
-    let returnData: string = '';
-
-    entities.forEach(entity => {
-      returnData += entity.fullTextAnnotation.text;
-    });
+      entities.forEach(entity => {
+        returnData += entity.fullTextAnnotation
+          ? entity.fullTextAnnotation.text
+          : '';
+      });
+    } catch (e) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_GATEWAY,
+          error: e,
+        },
+        HttpStatus.BAD_GATEWAY,
+      );
+    }
 
     return returnData;
   }
