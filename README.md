@@ -9,9 +9,12 @@ Scrape and analyze Instagram profiles to show relevant data in the UI.
 Overview:
 
 - **API:** provide an endpoint to scrape and analyze profiles from Instagram.
+    - detect popular #hashtags and @mentions from post.
+    - detect and analyze Brand affinity and interests from post descriptions and post images using NLP and ML service.
+    - calculate engagement and engagement rate.
 - **UI:** list all the viewable profiles that are scraped and show the details of the individual profile.
 
-I used `node.js`, `nestJS`, `typescript`, `typeorm` & `MySql` for back-end API. And `vue.js`, `vuex`, `bootstrap` & `SCSS` for UI. I also used `docker-compose` `eslint` and `prettier`.
+I used `node.js`, `nestJS`, `typescript`, `typeorm` & `MySql` for back-end API. And `vue.js`, `vuex`, `bootstrap` & `SCSS` for UI. I also used `docker-compose`, `eslint`, `prettier` Google <a href="https://cloud.google.com/vision">Vision API</a> for parsing text from image and <a href="https://cloud.google.com/natural-language">NL API</a> for natural language processing.
 
 ### Setup:
 
