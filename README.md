@@ -14,7 +14,7 @@ Overview:
     - calculate engagement and engagement rate.
 - **UI:** list all the viewable profiles that are scraped and show the details of the individual profile.
 
-I used `node.js`, `nestJS`, `typescript`, `typeorm` & `MySql` for back-end API. And `vue.js`, `vuex`, `bootstrap` & `SCSS` for UI. I also used `docker-compose`, `eslint`, `prettier` and Google <a href="https://cloud.google.com/vision">Vision API</a> for parsing text from image and <a href="https://cloud.google.com/natural-language">NL API</a> for natural language processing.
+Used `node.js`, `nestJS`, `typescript`, `typeorm`, `MySql` `docker-compose` & `eslint` for back-end API. And `vue.js`, `vuex`, `bootstrap`, `SCSS` & `docker-compose`, `eslint`, `prettier` for UI. Also used Google <a href="https://cloud.google.com/vision">Vision API</a> for parsing text from image and <a href="https://cloud.google.com/natural-language">NL API</a> for natural language processing.
 
 <img alt="List all the viewable profiles" src="https://raw.githubusercontent.com/nazmulb/instagram-profile-scraper/master/images/list.png" width="882px" />
 
