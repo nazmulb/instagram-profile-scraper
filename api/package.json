@@ -1,8 +1,8 @@
 {
   "name": "api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Instagram Profile Scraper API",
+  "author": "Nazmul Basher <nazmul.basher@gmail.com>",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
