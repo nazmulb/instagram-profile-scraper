@@ -21,7 +21,7 @@
     "@nestjs/core": "^6.7.2",
     "@nestjs/platform-express": "^6.7.2",
     "@nestjs/typeorm": "^7.0.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "mysql": "^2.18.1",
